@@ -64,6 +64,8 @@ public class login extends javax.swing.JFrame {
         JLabel_logo = new javax.swing.JLabel();
         txt_user = new javax.swing.JTextField();
         txt_pass = new javax.swing.JPasswordField();
+        jButton_acceder = new javax.swing.JButton();
+        jLabel_footer = new javax.swing.JLabel();
         JLabel_fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -84,6 +86,16 @@ public class login extends javax.swing.JFrame {
         txt_pass.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_pass.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(txt_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 370, 210, -1));
+
+        jButton_acceder.setBackground(new java.awt.Color(153, 153, 255));
+        jButton_acceder.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        jButton_acceder.setForeground(new java.awt.Color(255, 255, 255));
+        jButton_acceder.setText("Acceder");
+        jButton_acceder.setBorder(null);
+        getContentPane().add(jButton_acceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 420, 210, 37));
+
+        jLabel_footer.setText("Practicando Java Giampier Arellano B.");
+        getContentPane().add(jLabel_footer, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 480, -1, -1));
         getContentPane().add(JLabel_fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 550));
 
         pack();
@@ -127,6 +139,8 @@ public class login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JLabel_fondo;
     private javax.swing.JLabel JLabel_logo;
+    private javax.swing.JButton jButton_acceder;
+    private javax.swing.JLabel jLabel_footer;
     private javax.swing.JPasswordField txt_pass;
     private javax.swing.JTextField txt_user;
     // End of variables declaration//GEN-END:variables
