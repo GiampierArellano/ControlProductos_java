@@ -62,12 +62,28 @@ public class login extends javax.swing.JFrame {
     private void initComponents() {
 
         JLabel_logo = new javax.swing.JLabel();
+        txt_user = new javax.swing.JTextField();
+        txt_pass = new javax.swing.JPasswordField();
         JLabel_fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(JLabel_logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(67, 40, 270, 270));
+
+        txt_user.setBackground(new java.awt.Color(153, 153, 255));
+        txt_user.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txt_user.setForeground(new java.awt.Color(255, 255, 255));
+        txt_user.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt_user.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        getContentPane().add(txt_user, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 330, 210, -1));
+
+        txt_pass.setBackground(new java.awt.Color(153, 153, 255));
+        txt_pass.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txt_pass.setForeground(new java.awt.Color(255, 255, 255));
+        txt_pass.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt_pass.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        getContentPane().add(txt_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 370, 210, -1));
         getContentPane().add(JLabel_fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 550));
 
         pack();
@@ -111,5 +127,7 @@ public class login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JLabel_fondo;
     private javax.swing.JLabel JLabel_logo;
+    private javax.swing.JPasswordField txt_pass;
+    private javax.swing.JTextField txt_user;
     // End of variables declaration//GEN-END:variables
 }
