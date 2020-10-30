@@ -38,6 +38,14 @@ public class login extends javax.swing.JFrame {
         //colocar la imagen que estamos escalando dentro del jlabel
         JLabel_fondo.setIcon(icono);
         this.repaint();
+        //DEFINIENDO EL LOGO
+        //creamos objeto
+        ImageIcon wallpaper_logo = new ImageIcon("src/images/DS.png");
+        //Creamos objeto para definirlas dimensiones de la imagen
+        Icon icono_logo = new ImageIcon(wallpaper_logo.getImage().getScaledInstance(JLabel_logo.getWidth(),
+            JLabel_logo.getHeight(), Image.SCALE_DEFAULT));
+        JLabel_logo.setIcon(icono_logo);
+        this.repaint();
     }
     @Override
     public Image getIconImage(){
@@ -53,21 +61,14 @@ public class login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        JLabel_logo = new javax.swing.JLabel();
         JLabel_fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(JLabel_fondo, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(JLabel_fondo, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
-        );
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(JLabel_logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(67, 40, 270, 270));
+        getContentPane().add(JLabel_fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 550));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -109,5 +110,6 @@ public class login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JLabel_fondo;
+    private javax.swing.JLabel JLabel_logo;
     // End of variables declaration//GEN-END:variables
 }
