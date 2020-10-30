@@ -9,13 +9,16 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-
+import java.sql.*;
+import clases.Conexion;
+import javax.swing.JOptionPane;
 /**
  *
  * @author N3mesis
  */
 public class login extends javax.swing.JFrame {
-
+    public static String user = "";
+    String pass = "";
     /**
      * Creates new form login
      */
@@ -92,6 +95,11 @@ public class login extends javax.swing.JFrame {
         jButton_acceder.setForeground(new java.awt.Color(255, 255, 255));
         jButton_acceder.setText("Acceder");
         jButton_acceder.setBorder(null);
+        jButton_acceder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_accederActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton_acceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 420, 210, 37));
 
         jLabel_footer.setText("Practicando Java Giampier Arellano B.");
@@ -100,6 +108,17 @@ public class login extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton_accederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_accederActionPerformed
+        // TODO add your handling code here:
+        user = txt_user.getText().trim();
+        pass = txt_pass.getText().trim();
+        if(!user.equals("")||!pass.equals("")){
+            
+        }else{
+            JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
+        }
+    }//GEN-LAST:event_jButton_accederActionPerformed
 
     /**
      * @param args the command line arguments
