@@ -7,6 +7,8 @@ package ventanas;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -19,6 +21,23 @@ public class login extends javax.swing.JFrame {
      */
     public login() {
         initComponents();
+        //Definimos el tamaño
+        setSize(400, 550);
+        //Evitamos que el usuario modifique el tamaño
+        setResizable(false);
+        //Cambiamos el titulo
+        setTitle("Acceso al sistema");
+        //Centrar la interfaz en la pantalla
+        setLocationRelativeTo(null);
+        //creamos objeto fondo
+        ImageIcon fondo = new ImageIcon("src/images/wallpaperPrincipal.jpg");
+        //creamos nuevo objeto para definir las dimesiones de la imagen
+        //y se ajusten a nuestro JLabel
+        Icon icono = new ImageIcon(fondo.getImage().getScaledInstance(JLabel_fondo.getWidth(), 
+                JLabel_fondo.getHeight(), Image.SCALE_DEFAULT));
+        //colocar la imagen que estamos escalando dentro del jlabel
+        JLabel_fondo.setIcon(icono);
+        this.repaint();
     }
     @Override
     public Image getIconImage(){
@@ -34,6 +53,8 @@ public class login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        JLabel_fondo = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
 
@@ -41,11 +62,11 @@ public class login extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(JLabel_fondo, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(JLabel_fondo, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
         );
 
         pack();
@@ -87,5 +108,6 @@ public class login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel JLabel_fondo;
     // End of variables declaration//GEN-END:variables
 }
