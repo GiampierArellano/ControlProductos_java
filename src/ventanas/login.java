@@ -114,7 +114,41 @@ public class login extends javax.swing.JFrame {
         user = txt_user.getText().trim();
         pass = txt_pass.getText().trim();
         if(!user.equals("")||!pass.equals("")){
-            
+            try{
+                //Establecemos la conexion, llamamos al metodo conectar
+                Connection cn = Conexion.conectar();
+                PreparedStatement pst = cn.prepareStatement(
+                    "select tipo_nivel, status from usuarios where username = '" +user
+                     + "' and password = '" + pass + "'");
+                //ejecutar la instruccion anterior
+                ResultSet rs = pst.executeQuery();
+                if(rs.next()){
+                    String tipo_nivel = rs.getString("tipo_nivel");
+                    String status = rs.getString("status");
+                    
+                    if(tipo_nivel.equalsIgnoreCase("Administrador") && status.equalsIgnoreCase("Activo")){
+                        dispose();
+                        new Administrador().setVisible(true);
+                    }else if(tipo_nivel.equalsIgnoreCase("Capturista") && status.equalsIgnoreCase("Activo")){
+                        dispose();
+                        new Capturista().setVisible(true);
+                    }else if(tipo_nivel.equalsIgnoreCase("Tecnico") && status.equalsIgnoreCase("Activo")){
+                        dispose();
+                        new Tecnico().setVisible(true);
+                    }
+                    
+                }else {
+                    JOptionPane.showMessageDialog(null, "Datos de acceso incorrectos.");
+                    txt_user.setText("");
+                    txt_pass.setText("");
+                }
+                
+            } catch (SQLException e){
+                //mensaje para el programador
+                System.out.println("Error en el botón acceder. "+e);
+                //mensaje para el usuario
+                JOptionPane.showMessageDialog(null, "Error al iniciar sesion, contacte al administrador");
+            }
         }else{
             JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
         }
