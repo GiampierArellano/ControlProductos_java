@@ -15,6 +15,7 @@ public class Capturista extends javax.swing.JFrame {
     /** Creates new form Capturista */
     public Capturista() {
         initComponents();
+        setTitle("Capturista");
     }
 
     /** This method is called from within the constructor to

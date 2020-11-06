@@ -16,6 +16,7 @@ public class Tecnico extends javax.swing.JFrame {
      */
     public Tecnico() {
         initComponents();
+        setTitle("Tecnico");
     }
 
     /**
