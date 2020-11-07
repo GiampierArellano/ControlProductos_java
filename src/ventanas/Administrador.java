@@ -4,22 +4,73 @@
  * and open the template in the editor.
  */
 package ventanas;
-
+import java.sql.*;
+import clases.Conexion;
+import java.awt.Image;
+import java.awt.Toolkit;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.WindowConstants;
 /**
  *
  * @author N3mesis
  */
 public class Administrador extends javax.swing.JFrame {
-
+    
+    String user, nombre_usuario;
+    //creamos variable para enviar datos entre interfaces
+    public static int sesion_usuario;
     /**
      * Creates new form Administrador
      */
     public Administrador() {
         initComponents();
+        user = login.user;
+        sesion_usuario = 1;
+        //dimensiones de interfaz
+        setSize(650, 430);
+        //Para que el usuario no modifique la dimension de la interfaz
+        setResizable(false);
         //Cambiamos el titulo
-        setTitle("Administrador");
+        setTitle("Administrador - Sesion de " + user);
+        //Centrar la interfaz en la pantalla
+        setLocationRelativeTo(null);
+        //Evitar que el programa se ejecute en segundo plano
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        
+        ImageIcon fondo = new ImageIcon("src/images/wallpaperPrincipal.jpg");
+        //creamos nuevo objeto para definir las dimesiones de la imagen
+        //y se ajusten a nuestro JLabel
+        Icon icono = new ImageIcon(fondo.getImage().getScaledInstance(JLabel_wallpaper.getWidth(), 
+                JLabel_wallpaper.getHeight(), Image.SCALE_DEFAULT));
+        //colocar la imagen que estamos escalando dentro del jlabel
+        JLabel_wallpaper.setIcon(icono);
+        this.repaint();
+        
+        try{
+            //usamos la clase para la conexion
+            //creamos el objeto cn de la clase connection
+            Connection cn = Conexion.conectar();
+            //creamos un objeto de la clase PreparedStatement
+            PreparedStatement pst = cn.prepareStatement(
+            "select nombre_usuario from usuarios where username = '" + user + "'");
+            
+            //creamos un objeto de la clase ResultSet
+            ResultSet rs = pst.executeQuery();
+            if(rs.next()){
+                nombre_usuario = rs.getString("nombre_usuario");
+                jLabel_nomUsuario.setText(nombre_usuario);
+            }
+        }catch (Exception e){
+            System.err.println("Error en conexion desde la interfaz administrador");
+        }
+            
     }
-
+    @Override
+    public Image getIconImage(){
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("images/icon.png"));
+        return retValue;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -46,6 +97,7 @@ public class Administrador extends javax.swing.JFrame {
         JLabel_wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(getIconImage());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel_nomUsuario.setFont(new java.awt.Font("Arial", 1, 20)); // NOI18N
