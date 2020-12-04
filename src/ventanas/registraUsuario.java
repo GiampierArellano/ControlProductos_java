@@ -244,7 +244,24 @@ public class registraUsuario extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Nombre de usuario no disponible.");
                 cn.close();
             }else{
-                
+                //Cerramos la conexion
+                cn.close();
+                //si validacion es igual a 0 quiere decir q no hubo campos vacios
+                //entonces podemos proceder a registrar el usuario
+                if(validacion == 0){
+                    try {
+                        //Creamos nuestro objeto para la conexion a nuestra clase Conexion
+                        Connection cn2 = Conexion.conectar();
+                        PreparedStatement pst2 = cn2.prepareStatement(
+                        
+                        
+                        
+                    }catch (Exception e){
+                        
+                    }
+                }else {
+                    
+                }
             }
         } catch (SQLException e) {
             System.out.println("Error al validar nombre de usuario. " +e);
