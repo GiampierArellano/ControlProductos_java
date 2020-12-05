@@ -14,6 +14,7 @@ import java.awt.event.MouseEvent;
 import java.util.Locale;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
@@ -57,6 +58,45 @@ public class GestionarUsuarios extends javax.swing.JFrame {
         //colocar la imagen que estamos escalando dentro del jlabel
         lbl_wallpapper.setIcon(icono);
         this.repaint();
+        
+        //iniciamos las consultas a la BD
+        try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement(
+            "select  idusuarios, nombre_usuario, username, tipo_nivel, status from usuarios");
+            
+            ResultSet rs = pst.executeQuery();
+            jTable_usuarios = new JTable(model);
+            //Colocamos el jtable dentro del jscrollpanel porque si los datos son mas 
+            //de los que podemos mostrar en nuestra interfaz entonces creará 
+            //de forma automatica un scroll
+            jScrollPane1.setViewportView(jTable_usuarios);
+            
+            //Asignamos nombre a cada columna
+            model.addColumn("ID");
+            model.addColumn("Nombre");
+            model.addColumn("Username");
+            model.addColumn("Status");
+            
+            //crear estructura repetitiva para llenar los datos en la tabla
+            while (rs.next()){
+                //creamos un vector de tipo object para ir descargando las filas
+                //el numero 5 corresponde a las 5 columnas de la tabla
+                Object[] fila = new Object[5];
+                //indice inicia en 0 y mientras sea menor de 5 entonces
+                //mientras se cumpla la condicion se guardará lo que encontremos en la BD
+                //en nuestro vector fila
+                for (int i=0; i<5;i++){
+                    fila[i]=rs.getObject(i + 1);
+                }
+                //añadimos al modelo la fila completa
+                model.addRow(fila);
+                }
+                cn.close();
+        }catch (SQLException e) {
+            System.out.println("Error al llenar la tabla." + e);
+            JOptionPane.showMessageDialog(null, "Error al mostrar informacion, ¡contacte al administrador!");
+        }
     }
     //Este metodo nos permite cambiar el icono de nuestra interfaz
     @Override
