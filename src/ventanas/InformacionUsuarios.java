@@ -31,18 +31,108 @@ public class InformacionUsuarios extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jLabel1 = new javax.swing.JLabel();
+        jbl_nombre = new javax.swing.JLabel();
+        jbl_nombre1 = new javax.swing.JLabel();
+        jbl_nombre2 = new javax.swing.JLabel();
+        jbl_nombre3 = new javax.swing.JLabel();
+        jbl_nombre4 = new javax.swing.JLabel();
+        jbl_nombre5 = new javax.swing.JLabel();
+        jbl_nombre6 = new javax.swing.JLabel();
+        txt_nombre = new javax.swing.JTextField();
+        txt_mail = new javax.swing.JTextField();
+        txt_telefono = new javax.swing.JTextField();
+        txt_username = new javax.swing.JTextField();
+        txt_registrado = new javax.swing.JTextField();
+        cmb_niveles = new javax.swing.JComboBox<>();
+        cmb_status = new javax.swing.JComboBox<>();
+        jbl_wallpaper = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Informacion de Usuario");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, -1, -1));
+
+        jbl_nombre.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jbl_nombre.setForeground(new java.awt.Color(255, 255, 255));
+        jbl_nombre.setText("Nombre:");
+        getContentPane().add(jbl_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
+
+        jbl_nombre1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jbl_nombre1.setForeground(new java.awt.Color(255, 255, 255));
+        jbl_nombre1.setText("emaik:");
+        getContentPane().add(jbl_nombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
+
+        jbl_nombre2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jbl_nombre2.setForeground(new java.awt.Color(255, 255, 255));
+        jbl_nombre2.setText("Telefono:");
+        getContentPane().add(jbl_nombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
+
+        jbl_nombre3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jbl_nombre3.setForeground(new java.awt.Color(255, 255, 255));
+        jbl_nombre3.setText("Permisos de:");
+        getContentPane().add(jbl_nombre3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
+
+        jbl_nombre4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jbl_nombre4.setForeground(new java.awt.Color(255, 255, 255));
+        jbl_nombre4.setText("Username:");
+        getContentPane().add(jbl_nombre4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 50, -1, -1));
+
+        jbl_nombre5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jbl_nombre5.setForeground(new java.awt.Color(255, 255, 255));
+        jbl_nombre5.setText("Status:");
+        getContentPane().add(jbl_nombre5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 110, -1, -1));
+
+        jbl_nombre6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jbl_nombre6.setForeground(new java.awt.Color(255, 255, 255));
+        jbl_nombre6.setText("Registrado por:");
+        getContentPane().add(jbl_nombre6, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 170, -1, -1));
+
+        txt_nombre.setBackground(new java.awt.Color(253, 253, 255));
+        txt_nombre.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        txt_nombre.setForeground(new java.awt.Color(255, 255, 255));
+        txt_nombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt_nombre.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 210, -1));
+
+        txt_mail.setBackground(new java.awt.Color(253, 253, 255));
+        txt_mail.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        txt_mail.setForeground(new java.awt.Color(255, 255, 255));
+        txt_mail.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt_mail.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        getContentPane().add(txt_mail, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 210, -1));
+
+        txt_telefono.setBackground(new java.awt.Color(253, 253, 255));
+        txt_telefono.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        txt_telefono.setForeground(new java.awt.Color(255, 255, 255));
+        txt_telefono.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt_telefono.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        getContentPane().add(txt_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 210, -1));
+
+        txt_username.setBackground(new java.awt.Color(253, 253, 255));
+        txt_username.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        txt_username.setForeground(new java.awt.Color(255, 255, 255));
+        txt_username.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt_username.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        getContentPane().add(txt_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 70, 210, -1));
+
+        txt_registrado.setBackground(new java.awt.Color(253, 253, 255));
+        txt_registrado.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        txt_registrado.setForeground(new java.awt.Color(255, 255, 255));
+        txt_registrado.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt_registrado.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txt_registrado.setEnabled(false);
+        getContentPane().add(txt_registrado, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 190, 210, -1));
+
+        cmb_niveles.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Capturista", "Tecnico" }));
+        getContentPane().add(cmb_niveles, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
+
+        cmb_status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
+        getContentPane().add(cmb_status, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 130, -1, -1));
+        getContentPane().add(jbl_wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 450));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -83,5 +173,21 @@ public class InformacionUsuarios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cmb_niveles;
+    private javax.swing.JComboBox<String> cmb_status;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jbl_nombre;
+    private javax.swing.JLabel jbl_nombre1;
+    private javax.swing.JLabel jbl_nombre2;
+    private javax.swing.JLabel jbl_nombre3;
+    private javax.swing.JLabel jbl_nombre4;
+    private javax.swing.JLabel jbl_nombre5;
+    private javax.swing.JLabel jbl_nombre6;
+    private javax.swing.JLabel jbl_wallpaper;
+    private javax.swing.JTextField txt_mail;
+    private javax.swing.JTextField txt_nombre;
+    private javax.swing.JTextField txt_registrado;
+    private javax.swing.JTextField txt_telefono;
+    private javax.swing.JTextField txt_username;
     // End of variables declaration//GEN-END:variables
 }
