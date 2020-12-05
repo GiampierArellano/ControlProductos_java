@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package ventanas;
+
 import java.sql.*;
 import clases.Conexion;
 import com.sun.java.swing.plaf.windows.resources.windows;
@@ -18,23 +19,25 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author N3mesis
  */
 public class GestionarUsuarios extends javax.swing.JFrame {
-    
+
     //En esta variable vamos a alojar el nombre de usuario que viene 
     //desde la interfaz login
     String user;
-    
+
     //creamos la variable user_update que almacenará cual es el usuario que 
     //se va a consultar desde la interfaz GestionarUsuarios
-    public static String user_update ="";
+    public static String user_update = "";
     //creamos el objeto model que nos permitirá acceder a todos metodos 
     //necesarios de la clase DefaultTableModel para modificar los datos en su 
     //interior (añadir filas o columnas, darle nombre a las columnas, etc)
     DefaultTableModel model = new DefaultTableModel();
+
     /**
      * Creates new form GestionarUsuarios
      */
@@ -45,7 +48,7 @@ public class GestionarUsuarios extends javax.swing.JFrame {
         user = login.user;
         //personalizamos nuestra interfaz
         setSize(630, 330);
-        setTitle("Usuarios registrados - Sesion de "+ user);
+        setTitle("Usuarios registrados - Sesion de " + user);
         setResizable(false);
         setLocationRelativeTo(null);
         //El metodo inferior evita que finalice el programa cuando cerremos la interfaz
@@ -53,17 +56,17 @@ public class GestionarUsuarios extends javax.swing.JFrame {
         ImageIcon fondo = new ImageIcon("src/images/wallpaperPrincipal.jpg");
         //creamos nuevo objeto para definir las dimesiones de la imagen
         //y se ajusten a nuestro JLabel
-        Icon icono = new ImageIcon(fondo.getImage().getScaledInstance(lbl_wallpapper.getWidth(), 
+        Icon icono = new ImageIcon(fondo.getImage().getScaledInstance(lbl_wallpapper.getWidth(),
                 lbl_wallpapper.getHeight(), Image.SCALE_DEFAULT));
         //colocar la imagen que estamos escalando dentro del jlabel
         lbl_wallpapper.setIcon(icono);
         this.repaint();
-        
+
         //iniciamos las consultas a la BD
         try {
             Connection cn = Conexion.conectar();
             PreparedStatement pst = cn.prepareStatement(
-            "select  idusuarios, nombre_usuario, username, tipo_nivel, status from usuarios");
+                    "select  idusuarios, nombre_usuario, username, tipo_nivel, status from usuarios");
             
             ResultSet rs = pst.executeQuery();
             jTable_usuarios = new JTable(model);
@@ -71,36 +74,56 @@ public class GestionarUsuarios extends javax.swing.JFrame {
             //de los que podemos mostrar en nuestra interfaz entonces creará 
             //de forma automatica un scroll
             jScrollPane1.setViewportView(jTable_usuarios);
-            
+
             //Asignamos nombre a cada columna
             model.addColumn("ID");
             model.addColumn("Nombre");
             model.addColumn("Username");
             model.addColumn("Status");
-            
+
             //crear estructura repetitiva para llenar los datos en la tabla
-            while (rs.next()){
+            while (rs.next()) {
                 //creamos un vector de tipo object para ir descargando las filas
                 //el numero 5 corresponde a las 5 columnas de la tabla
                 Object[] fila = new Object[5];
                 //indice inicia en 0 y mientras sea menor de 5 entonces
                 //mientras se cumpla la condicion se guardará lo que encontremos en la BD
                 //en nuestro vector fila
-                for (int i=0; i<5;i++){
-                    fila[i]=rs.getObject(i + 1);
+                for (int i = 0; i < 5; i++) {
+                    fila[i] = rs.getObject(i + 1);
                 }
                 //añadimos al modelo la fila completa
                 model.addRow(fila);
-                }
-                cn.close();
-        }catch (SQLException e) {
+            }
+            cn.close();
+        } catch (SQLException e) {
             System.out.println("Error al llenar la tabla." + e);
             JOptionPane.showMessageDialog(null, "Error al mostrar informacion, ¡contacte al administrador!");
         }
+        
+        jTable_usuarios.addMouseListener(new MouseAdapter() {
+            //Usamos Override para sobre escribir metodos
+            @Override
+            public void mouseClicked(MouseEvent e){
+                //Debemos indicarle a nuestro programa una fila o una columna
+                //Siempre se va a seleccionar la columna2 porque es donde esta
+                //registrado el usuario
+                int fila_point = jTable_usuarios.rowAtPoint(e.getPoint());
+                //colocamos 2 porque nostros queremos recuperar la columna donde esta
+                //el username
+                int columna_point = 2;
+                if(fila_point > -1){
+                    user_update = (String)model.getValueAt(fila_point, columna_point);
+                    InformacionUsuarios info_usuario = new InformacionUsuarios();
+                    info_usuario.setVisible(true);
+                }
+            }
+        });
     }
+
     //Este metodo nos permite cambiar el icono de nuestra interfaz
     @Override
-    public Image getIconImage(){
+    public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("images/icon.png"));
         return retValue;
     }
