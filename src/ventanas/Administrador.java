@@ -66,6 +66,7 @@ public class Administrador extends javax.swing.JFrame {
         }
             
     }
+    //Este metodo nos permite cambiar el icono de nuestra interfaz
     @Override
     public Image getIconImage(){
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("images/icon.png"));
@@ -114,6 +115,11 @@ public class Administrador extends javax.swing.JFrame {
         getContentPane().add(jButton_regUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 120, 100));
 
         jButton_gestUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/informationuser.png"))); // NOI18N
+        jButton_gestUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_gestUserActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton_gestUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 120, 100));
 
         jButton_Creatividad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/creatividad.png"))); // NOI18N
@@ -165,6 +171,14 @@ public class Administrador extends javax.swing.JFrame {
         registraUsuario regUsuarios = new registraUsuario();
         regUsuarios.setVisible(true);
     }//GEN-LAST:event_jButton_regUserActionPerformed
+
+    private void jButton_gestUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_gestUserActionPerformed
+        // TODO add your handling code here:
+        //Creamos el objeto de la clase GestionarUsuarios
+        GestionarUsuarios gestuser = new GestionarUsuarios();
+        //Vinculamos el boton para que nos muestre la interfaz GestionarUsuarios
+        gestuser.setVisible(true);
+    }//GEN-LAST:event_jButton_gestUserActionPerformed
 
     /**
      * @param args the command line arguments
