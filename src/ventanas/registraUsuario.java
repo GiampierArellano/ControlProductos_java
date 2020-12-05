@@ -172,7 +172,7 @@ public class registraUsuario extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         int permisos_cmb, validacion=0;
-        String nombre, mail, telefono, username, pass, permisos_string;
+        String nombre, mail, telefono, username, pass, permisos_string ="";
         //empezar a guardar los datos que ingresará el administrador dentro
         //de nuestras variables
         mail = txt_mail.getText().trim();
@@ -253,14 +253,49 @@ public class registraUsuario extends javax.swing.JFrame {
                         //Creamos nuestro objeto para la conexion a nuestra clase Conexion
                         Connection cn2 = Conexion.conectar();
                         PreparedStatement pst2 = cn2.prepareStatement(
+                            //Insertamos los datos a la base de datos
+                            //colocamos el signo de ? porque no sabemos que datos ingresara el usuario
+                            "insert into usuarios values (?,?,?,?,?,?,?,?,?)");
+                        //setInt (enviar valor entero) = 1 se coloca 1 porque va a nuestra primera columna de base de datos
+                        //que es el ID. en nuestra BD los ID se generan de manera automatica por eso 
+                        //colocamos el valor de 0.
+                        pst2.setInt(1, 0);
+                        //Colocamos 2 porque el dato va para la segunda columna.
+                        // y "nombre" porque la variable corresponde al nombre del usuario
+                        pst2.setString(2, nombre );
+                        pst2.setString(3, mail);
+                        pst2.setString(4, telefono);
+                        pst2.setString(5, username);
+                        pst2.setString(6, pass);
+                        pst2.setString(7, permisos_string);
+                        pst2.setString(8, "Activo");
+                        pst2.setString(9, user);
+                        //Ejecutar las lineas de codigo
+                        pst2.executeUpdate();
+                        //Cerramos la conexion
+                        cn2.close();
+                        //Metodo para limpiar campos
+                        Limpiar();
+                        //Cambiamos de color los campos una ves registrado
+                        txt_mail.setBackground(Color.green);
+                        txt_username.setBackground(Color.green);
+                        txt_password.setBackground(Color.green);
+                        txt_nombre.setBackground(Color.green);
+                        txt_telefono.setBackground(Color.green);
                         
-                        
+                        JOptionPane.showMessageDialog(null, "Registro exitoso");
+                        //dispose permite liberar recursos pues la ventana se cerrará al registrar 
+                        //al usuario
+                        this.dispose();
                         
                     }catch (Exception e){
-                        
+                        //Este es el mensaje que aparecerá en el log
+                        System.out.println("Error en registrar usuario." + e);
+                        //este es el mensaje que aparecerá en una nueva ventana
+                        JOptionPane.showMessageDialog(null, "Error al registro!. contacte al administrador");
                     }
                 }else {
-                    
+                    JOptionPane.showMessageDialog(null, "Debes de llenar todos los campos");
                 }
             }
         } catch (SQLException e) {
@@ -323,4 +358,15 @@ public class registraUsuario extends javax.swing.JFrame {
     private javax.swing.JTextField txt_telefono;
     private javax.swing.JTextField txt_username;
     // End of variables declaration//GEN-END:variables
+    //Creamos el metodo limpiar
+    public void Limpiar(){
+        txt_mail.setText("");
+        txt_nombre.setText("");
+        txt_password.setText("");
+        txt_telefono.setText("");
+        txt_username.setText("");
+        cmb_niveles.setSelectedIndex(0);
+        
+    }
+
 }
