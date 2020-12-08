@@ -10,6 +10,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 /**
  *
@@ -47,6 +48,37 @@ public class InformacionUsuarios extends javax.swing.JFrame {
         this.repaint();
         
         jbl_titulo.setText("Informacion del usuario " + user_update);
+        
+        try {
+            //establecemos la conexion a la BD
+            //creamos el objeto cn de la clase connection que sea igual al metodo conectar 
+            //de la clase conexion
+            Connection cn = Conexion.conectar();
+            //Creamos el objeto pst de la clase preparedstatement
+            //Aquí programamos la instruccion a la BD
+            PreparedStatement pst = cn.prepareStatement(
+                "select * from usuarios where username = '" + user_update + "'");
+            //creamos el objeto rs de la clase resultSet
+            ResultSet rs = pst.executeQuery();
+            //programamos esta condicion para las veces que se cumpla la condicion
+            if (rs.next()){
+                //traemos el id y lo almacenamos en la variable ID
+                ID = rs.getInt("idusuarios");
+                //Asignamos a cada caja de texto el dato que existe en la BD
+                txt_nombre.setText(rs.getString("nombre_usuario"));
+                txt_mail.setText(rs.getString("email"));
+                txt_telefono.setText(rs.getString("telefono"));
+                txt_username.setText(rs.getString("username"));
+                txt_registrado.setText(rs.getString("registrado_por"));
+                cmb_niveles.setSelectedItem(rs.getString("tipo_nivel"));
+                cmb_status.setSelectedItem(rs.getString("status"));
+            }
+            //Cerramos la conexion
+            cn.close();
+        } catch (SQLException e){
+            System.out.println("Error al cargar usuario: "+ e);
+            JOptionPane.showMessageDialog(null, "Error al cargar!, contacte al administrador." );
+        }
     }
     
     @Override
@@ -99,7 +131,7 @@ public class InformacionUsuarios extends javax.swing.JFrame {
 
         jbl_nombre1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jbl_nombre1.setForeground(new java.awt.Color(255, 255, 255));
-        jbl_nombre1.setText("emaik:");
+        jbl_nombre1.setText("Email:");
         getContentPane().add(jbl_nombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
 
         jbl_nombre2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -127,35 +159,35 @@ public class InformacionUsuarios extends javax.swing.JFrame {
         jbl_nombre6.setText("Registrado por:");
         getContentPane().add(jbl_nombre6, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 170, -1, -1));
 
-        txt_nombre.setBackground(new java.awt.Color(253, 253, 255));
+        txt_nombre.setBackground(new java.awt.Color(153, 153, 255));
         txt_nombre.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         txt_nombre.setForeground(new java.awt.Color(255, 255, 255));
         txt_nombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_nombre.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 210, -1));
 
-        txt_mail.setBackground(new java.awt.Color(253, 253, 255));
+        txt_mail.setBackground(new java.awt.Color(153, 153, 255));
         txt_mail.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         txt_mail.setForeground(new java.awt.Color(255, 255, 255));
         txt_mail.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_mail.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(txt_mail, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 210, -1));
 
-        txt_telefono.setBackground(new java.awt.Color(253, 253, 255));
+        txt_telefono.setBackground(new java.awt.Color(153, 153, 255));
         txt_telefono.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         txt_telefono.setForeground(new java.awt.Color(255, 255, 255));
         txt_telefono.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_telefono.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(txt_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 210, -1));
 
-        txt_username.setBackground(new java.awt.Color(253, 253, 255));
+        txt_username.setBackground(new java.awt.Color(153, 153, 255));
         txt_username.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         txt_username.setForeground(new java.awt.Color(255, 255, 255));
         txt_username.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_username.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(txt_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 70, 210, -1));
 
-        txt_registrado.setBackground(new java.awt.Color(253, 253, 255));
+        txt_registrado.setBackground(new java.awt.Color(153, 153, 255));
         txt_registrado.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         txt_registrado.setForeground(new java.awt.Color(255, 255, 255));
         txt_registrado.setHorizontalAlignment(javax.swing.JTextField.CENTER);
