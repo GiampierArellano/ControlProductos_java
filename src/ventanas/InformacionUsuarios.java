@@ -6,6 +6,7 @@
 package ventanas;
 import java.sql.*;
 import clases.Conexion;
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.Icon;
@@ -206,6 +207,11 @@ public class InformacionUsuarios extends javax.swing.JFrame {
         jButton_actualizar.setForeground(new java.awt.Color(255, 255, 255));
         jButton_actualizar.setText("Actualizar Usuario");
         jButton_actualizar.setBorder(null);
+        jButton_actualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_actualizarActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton_actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 250, 210, 35));
 
         jButton_restaurarpass.setBackground(new java.awt.Color(153, 153, 255));
@@ -221,6 +227,94 @@ public class InformacionUsuarios extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_actualizarActionPerformed
+        // TODO add your handling code here:
+        int permisos_cmb, status_cmb, validacion = 0;
+        String nombre, mail, telefono, username, pass, permisos_string = "", status_string = "";
+        
+        mail = txt_mail.getText().trim();
+        username = txt_username.getText().trim();
+        nombre = txt_nombre.getText().trim();
+        telefono = txt_telefono.getText().trim();
+        permisos_cmb = cmb_niveles.getSelectedIndex()+1;
+        status_cmb = cmb_status.getSelectedIndex()+1;
+        
+        if (mail.equals("")){
+            txt_mail.setBackground(Color.RED);
+            validacion++;
+        }
+        if (username.equals("")){
+            txt_username.setBackground(Color.RED);
+            validacion++;
+        }
+        if (nombre.equals("")){
+            txt_nombre.setBackground(Color.RED);
+            validacion++;
+        }
+        if (telefono.equals("")){
+            txt_telefono.setBackground(Color.RED);
+            validacion++;
+        }
+        //usamos la variable validacion
+        if (validacion == 0){
+            //cambiamos los datos que llegan desde el combobox. De numerico a texto
+            if(permisos_cmb == 1){
+                permisos_string = "Administracion";
+            }else if (permisos_cmb == 2){
+                permisos_string = "Capturista";
+            }else if (permisos_cmb ==3){
+                permisos_string = "Tecnico";
+            }
+            if(status_cmb == 1){
+                status_string = "Activo";
+            } else if(status_cmb ==2){
+                status_string="Inactivo";
+            }
+            try {
+                Connection cn = Conexion.conectar();
+                PreparedStatement pst = cn.prepareStatement(
+                        //Esta primera consulta es para que se consulte en la base de datos
+                        //todos los registros que existan con ese username pero que no considere
+                        //el que estamos modificando
+                "select username from usuarios where username = '" + username + 
+                        "' and not idusuarios = '" + ID + "'");
+                
+                ResultSet rs = pst.executeQuery();
+                //En esta considicion se valida que el username a ingresar se encuentre disponible.
+                //si la consulta anterior devuelve un registro quiere decir el usuarname no esta disponible
+                if(rs.next()){
+                    txt_username.setBackground(Color.RED);
+                    JOptionPane.showMessageDialog(null, "Nombre de usuario no disponible");
+                }else{
+                    //si el username esta disponible entonces:
+                    Connection cn2 = Conexion.conectar();
+                    PreparedStatement pst2 = cn2.prepareStatement(
+                            //Debe modificar los campos de la tabla usuario donde el ID del usuario
+                            //sea exactamente el ID de la persona que estamos consultando
+                    "update usuarios set nombre_usuario = ?, email =?, telefono=?, username = ?, "
+                            + "tipo_nivel =?, status = ? where idusuarios = '" + ID + "'");
+                    
+                    pst2.setString(1, nombre);
+                    pst2.setString(2, mail);
+                    pst2.setString(3, telefono);
+                    pst2.setString(4, username);
+                    pst2.setString(5, permisos_string);
+                    pst2.setString(6, status_string);
+                    
+                    //ejecutamos la actualizacion
+                    pst2.executeUpdate();
+                    cn2.close();
+                    JOptionPane.showMessageDialog(null, "Modificacion Correcta");
+                }
+            }catch (SQLException e) {
+                System.out.println("Error al actualizar." + e);
+            }
+        }else {
+            JOptionPane.showMessageDialog(null, "Debes completar todos los campos");
+        }
+                
+    }//GEN-LAST:event_jButton_actualizarActionPerformed
 
     /**
      * @param args the command line arguments
