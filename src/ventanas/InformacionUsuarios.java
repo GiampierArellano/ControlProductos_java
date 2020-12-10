@@ -219,6 +219,11 @@ public class InformacionUsuarios extends javax.swing.JFrame {
         jButton_restaurarpass.setForeground(new java.awt.Color(255, 255, 255));
         jButton_restaurarpass.setText("Restaurar Password");
         jButton_restaurarpass.setBorder(null);
+        jButton_restaurarpass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_restaurarpassActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton_restaurarpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 300, 210, 35));
 
         jLabel_footer.setText("Practicando programación Java");
@@ -315,6 +320,12 @@ public class InformacionUsuarios extends javax.swing.JFrame {
         }
                 
     }//GEN-LAST:event_jButton_actualizarActionPerformed
+
+    private void jButton_restaurarpassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_restaurarpassActionPerformed
+        // TODO add your handling code here:
+        RestaurarPass restarpass = new RestaurarPass();
+        restarpass.setVisible(true);
+    }//GEN-LAST:event_jButton_restaurarpassActionPerformed
 
     /**
      * @param args the command line arguments
