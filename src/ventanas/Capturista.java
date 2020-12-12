@@ -5,17 +5,75 @@
  */
 
 package ventanas;
+import java.sql.*;
+import clases.Conexion;
 
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Paragraph;
+import java.awt.Image;
+import java.awt.Toolkit;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
 /**
  *
  * @author N3mesis
  */
 public class Capturista extends javax.swing.JFrame {
+    String user, nombre_usuario;
+    int sesion_usuario;
 
     /** Creates new form Capturista */
     public Capturista() {
         initComponents();
-        setTitle("Capturista");
+        user = login.user;
+        sesion_usuario = Administrador.sesion_usuario;
+        setSize(550, 300);
+        //Para que el usuario no modifique la dimension de la interfaz
+        setResizable(false);
+        //Cambiamos el titulo
+        setTitle("Capturista - Sesion de " + user);
+        //Centrar la interfaz en la pantalla
+        setLocationRelativeTo(null);
+        if(sesion_usuario == 1){
+            setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        }else {
+            setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        }
+        ImageIcon fondo = new ImageIcon("src/images/wallpaperPrincipal.jpg");
+        //creamos nuevo objeto para definir las dimesiones de la imagen
+        //y se ajusten a nuestro JLabel
+        Icon icono = new ImageIcon(fondo.getImage().getScaledInstance(jbl_wallpaper.getWidth(), 
+                jbl_wallpaper.getHeight(), Image.SCALE_DEFAULT));
+        //colocar la imagen que estamos escalando dentro del jlabel
+        jbl_wallpaper.setIcon(icono);
+        this.repaint();
+        
+        try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement(
+            "select nombre_usuario from usuarios where username = '" + user + "'");
+            ResultSet rs = pst.executeQuery();
+            if(rs.next()){
+                nombre_usuario = rs.getString("nombre_usuario");
+                jbl_nombreusuario.setText("Bienvenido " + nombre_usuario);
+            }
+        }catch (SQLException e){
+            System.out.println("Error en consultar nombre" + e);
+        }
+    }
+    @Override
+    public Image getIconImage(){
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("images/icon.png"));
+        return retValue;
     }
 
     /** This method is called from within the constructor to
