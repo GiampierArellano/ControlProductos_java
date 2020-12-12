@@ -104,6 +104,11 @@ public class Capturista extends javax.swing.JFrame {
         getContentPane().add(jbl_nombreusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         jButton_RegistrarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add.png"))); // NOI18N
+        jButton_RegistrarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_RegistrarClienteActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton_RegistrarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 120, 100));
 
         jButton_GestionarClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/informationuser.png"))); // NOI18N
@@ -130,6 +135,12 @@ public class Capturista extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton_RegistrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RegistrarClienteActionPerformed
+        // TODO add your handling code here:
+        RegistarClientes rcli = new RegistarClientes();
+        rcli.setVisible(true);
+    }//GEN-LAST:event_jButton_RegistrarClienteActionPerformed
 
     /**
      * @param args the command line arguments
