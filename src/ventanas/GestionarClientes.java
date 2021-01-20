@@ -4,12 +4,17 @@
  * and open the template in the editor.
  */
 package ventanas;
+
 import java.sql.*;
 import clases.Conexion;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
@@ -18,10 +23,12 @@ import javax.swing.table.DefaultTableModel;
  * @author N3mesis
  */
 public class GestionarClientes extends javax.swing.JFrame {
+
     String user;
     //esta variable permite enviar datos entre interfaces
     public static int IDcliente_update = 0;
     DefaultTableModel model = new DefaultTableModel();
+
     /**
      * Creates new form GestionarClientes
      */
@@ -40,17 +47,64 @@ public class GestionarClientes extends javax.swing.JFrame {
         ImageIcon fondo = new ImageIcon("src/images/wallpaperPrincipal.jpg");
         //creamos nuevo objeto para definir las dimesiones de la imagen
         //y se ajusten a nuestro JLabel
-        Icon icono = new ImageIcon(fondo.getImage().getScaledInstance(jbl_wallpaper.getWidth(), 
+        Icon icono = new ImageIcon(fondo.getImage().getScaledInstance(jbl_wallpaper.getWidth(),
                 jbl_wallpaper.getHeight(), Image.SCALE_DEFAULT));
         //colocar la imagen que estamos escalando dentro del jlabel
         jbl_wallpaper.setIcon(icono);
         this.repaint();
+        
+        try {
+            Connection cn = Conexion.conectar();
+            
+            PreparedStatement pst = cn.prepareStatement(
+                    "select idclientes, nombre_cliente, mail_cliente, tel_cliente, ultima_modificacion from clientes");
+
+//            Debemos ejecutar la consulta anterior, para ello creamos el objeto ResultSet
+            ResultSet rs = pst.executeQuery();
+            
+            jTable_clientes = new JTable(model);
+            jScrollPane1.setViewportView(jTable_clientes);
+            
+            model.addColumn(" ");
+            model.addColumn("Nombre");
+            model.addColumn("Email");
+            model.addColumn("Telefono");
+            model.addColumn("Modificado por");
+            
+            while (rs.next()) {
+                Object[] fila = new Object[5];
+                for (int i = 0; i < 5; i++) {
+                    fila[i] = rs.getObject(i + 1);
+                }
+                model.addRow(fila);
+            }
+            cn.close();
+            
+        } catch (SQLException e) {
+            System.out.println("Error en el llenado de la tabla.");
+        }
+
+//        crear un evento para que la tabla interactue con los clicks que da el usuario
+        jTable_clientes.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e){
+                int fila_point = jTable_clientes.rowAtPoint(e.getPoint());
+                int columna_point = 0;
+                
+                if(fila_point > -1){
+                    IDcliente_update = (int)model.getValueAt(fila_point, columna_point);
+                    JOptionPane.showMessageDialog(null, "El id del cliente es: " + IDcliente_update);
+                }
+            }
+        });
     }
+
     @Override
-    public Image getIconImage(){
+    public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("images/icon.png"));
         return retValue;
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

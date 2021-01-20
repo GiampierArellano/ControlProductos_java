@@ -96,6 +96,7 @@ public class Administrador extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         JLabel_wallpaper = new javax.swing.JLabel();
+        jButton_Creatividad1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
@@ -167,6 +168,9 @@ public class Administrador extends javax.swing.JFrame {
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 380, -1, -1));
         getContentPane().add(JLabel_wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 430));
 
+        jButton_Creatividad1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/creatividad.png"))); // NOI18N
+        getContentPane().add(jButton_Creatividad1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 70, 120, 100));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -232,6 +236,7 @@ public class Administrador extends javax.swing.JFrame {
     private javax.swing.JButton jButton_AcercaDe;
     private javax.swing.JButton jButton_Capturista;
     private javax.swing.JButton jButton_Creatividad;
+    private javax.swing.JButton jButton_Creatividad1;
     private javax.swing.JButton jButton_Tecnico;
     private javax.swing.JButton jButton_gestUser;
     private javax.swing.JButton jButton_regUser;

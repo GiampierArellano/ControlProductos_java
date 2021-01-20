@@ -3,13 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Aprendizaje_autonomo/java/ControlProducto/CP_capturista/ControlProductos_java/src/ventanas/GestionarClientes.java</file>
+            <file>file:/D:/Aprendizaje_autonomo/java/ControlProducto/CP_capturista/ControlProductos_java/src/clases/Conexion.java</file>
             <file>file:/D:/Aprendizaje_autonomo/java/ControlProducto/CP_capturista/ControlProductos_java/src/ventanas/GestionarUsuarios.java</file>
-            <file>file:/D:/Aprendizaje_autonomo/java/ControlProducto/CP_capturista/ControlProductos_java/src/ventanas/RegistarClientes.java</file>
-            <file>file:/D:/Aprendizaje_autonomo/java/ControlProducto/CP_capturista/ControlProductos_java/src/ventanas/InformacionUsuarios.java</file>
-            <file>file:/D:/Aprendizaje_autonomo/java/ControlProducto/CP_capturista/ControlProductos_java/src/ventanas/Capturista.java</file>
-            <file>file:/D:/Aprendizaje_autonomo/java/ControlProducto/CP_capturista/ControlProductos_java/src/ventanas/registraUsuario.java</file>
             <file>file:/D:/Aprendizaje_autonomo/java/ControlProducto/CP_capturista/ControlProductos_java/src/ventanas/Administrador.java</file>
+            <file>file:/D:/Aprendizaje_autonomo/java/ControlProducto/CP_capturista/ControlProductos_java/src/ventanas/login.java</file>
         </group>
     </open-files>
 </project-private>
