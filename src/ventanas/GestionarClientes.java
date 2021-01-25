@@ -93,7 +93,11 @@ public class GestionarClientes extends javax.swing.JFrame {
                 
                 if(fila_point > -1){
                     IDcliente_update = (int)model.getValueAt(fila_point, columna_point);
-                    JOptionPane.showMessageDialog(null, "El id del cliente es: " + IDcliente_update);
+//                    Creamos un objeto para que se conecte con la interfaz informacion_clientes
+                    Informacion_Clientes informacionCli = new Informacion_Clientes();
+                    informacionCli.setVisible(true);
+                    
+//                    JOptionPane.showMessageDialog(null, "El id del cliente es: " + IDcliente_update);
                 }
             }
         });

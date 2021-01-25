@@ -19,6 +19,7 @@ import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Paragraph;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.FileOutputStream;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -120,6 +121,11 @@ public class Capturista extends javax.swing.JFrame {
         getContentPane().add(jButton_GestionarClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 120, 100));
 
         jButton_Imprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/impresora.png"))); // NOI18N
+        jButton_Imprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_ImprimirActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton_Imprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 80, 120, 100));
 
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -152,6 +158,66 @@ public class Capturista extends javax.swing.JFrame {
         GestionarClientes gescli = new GestionarClientes();
         gescli.setVisible(true);
     }//GEN-LAST:event_jButton_GestionarClientesActionPerformed
+
+    private void jButton_ImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ImprimirActionPerformed
+        // TODO add your handling code here:
+        Document documento = new Document();
+        try {
+            String ruta = System.getProperty("user.home");
+            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/ListaClientes.pdf"));
+            
+//            configurando la imagen del banner
+            com.itextpdf.text.Image header = com.itextpdf.text.Image.getInstance("src/images/BannerPDF.jpg");
+            header.scaleToFit(650, 1000);
+            header.setAlignment(Chunk.ALIGN_CENTER);
+            
+//            configurando el banner
+            Paragraph parrafo = new Paragraph();
+            parrafo.setAlignment(Paragraph.ALIGN_CENTER);
+            parrafo.add("Lista de clientes. \n \n");
+            parrafo.setFont(FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.DARK_GRAY));
+            
+            documento.open();
+            documento.add(header);
+            documento.add(parrafo);
+            
+            PdfPTable tabla = new PdfPTable(5);
+//            le damos nombre a las columnas
+            tabla.addCell("ID");
+            tabla.addCell("Nombre");
+            tabla.addCell("email");
+            tabla.addCell("Telefono");
+            tabla.addCell("Direccion");
+            
+            try {
+                Connection cn = Conexion.conectar();
+                PreparedStatement pst = cn.prepareStatement("select * from clientes");
+                ResultSet rs = pst.executeQuery();
+                
+                if(rs.next()){
+                    do{
+                        
+                        tabla.addCell(rs.getString(1));
+                        tabla.addCell(rs.getString(2));
+                        tabla.addCell(rs.getString(3));
+                        tabla.addCell(rs.getString(4));
+                        tabla.addCell(rs.getString(5));
+                        
+                    }while (rs.next());
+                    documento.add(tabla);
+                }
+                
+            } catch (SQLException e) {
+                System.err.println("Error al generar lista de clientes" + e);
+            }
+            
+            documento.close();
+            JOptionPane.showMessageDialog(null, "Lista de clientes creada correctamente.");
+            
+        } catch (Exception e) {
+            System.err.println("Error al generar el PDF" + e);
+        }
+    }//GEN-LAST:event_jButton_ImprimirActionPerformed
 
     /**
      * @param args the command line arguments
